@@ -2,7 +2,13 @@
   "name": "@wspro/eslint",
   "version": "1.0.0",
   "description": "ESLint config",
+  "author": "https://github.com/wsp-repo/",
   "license": "ISC",
+  "keywords": [
+    "prettier",
+    "eslint",
+    "tslint"
+  ],
   "main": "index.js",
   "repository": {
     "type": "git",
