@@ -1,6 +1,6 @@
 {
   "name": "@wspro/linter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Linter configs",
   "author": "https://github.com/wsp-repo/",
   "license": "ISC",
@@ -9,7 +9,6 @@
     "eslint",
     "tslint"
   ],
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/wsp-repo/linter.git"
