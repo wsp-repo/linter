@@ -1,6 +1,6 @@
 ## установка модуля
 ```
-npm i --save-dev --save-exact @wspro/eslint@latest
+npm i --save-dev --save-exact @wspro/linter@latest
 ```
 
 ## подключение конфигов
@@ -11,15 +11,15 @@ npm i --save-dev --save-exact @wspro/eslint@latest
 module.exports = {
   overrides: [
     {
-      extends: ['@wspro/eslint/js'],
+      extends: ['./node_modules/@wspro/linter/eslint/js'],
       files: ['*.js'],
     },
     {
-      extends: ['@wspro/eslint/ts'],
+      extends: ['./node_modules/@wspro/linter/eslint/ts'],
       files: ['*.ts'],
       parser: '@typescript-eslint/parser',
       parserOptions: {
-        include: ['src/**/*.ts', 'test/**/*.ts', 'typings/**/*.ts'],
+        include: ['./src/**/*.ts', './test/**/*.ts'],
         project: './tsconfig.json',
       },
     },
@@ -31,5 +31,5 @@ module.exports = {
 ### prettier
 Добавить в **package.json** строчку
 ```
-"prettier": "@wspro/eslint"
+"prettier": "@wspro/linter/prettier"
 ```

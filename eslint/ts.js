@@ -178,6 +178,7 @@ module.exports = {
         prev: ['block-like'],
       },
     ],
+    'react/jsx-filename-extension': 0,
     'require-await': 0,
     'simple-import-sort/imports': [
       2,
