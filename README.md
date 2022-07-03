@@ -1,5 +1,5 @@
 ## установка модуля
-Сначала нужно установить модуль через "npm i @wspro/eslint"
+npm i --save-dev --save-exact @wspro/eslint@latest
 
 ## подключение конфигов
 
@@ -29,4 +29,3 @@ module.exports = {
 Добавить в `package.json` строчку
 
   "prettier": "@wspro/eslint"
-
