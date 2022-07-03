@@ -1,11 +1,13 @@
 ## установка модуля
+```
 npm i --save-dev --save-exact @wspro/eslint@latest
+```
 
 ## подключение конфигов
 
 ### eslint
-Пример конфига .eslintrc.js из корня сервиса.
-
+Пример конфига **.eslintrc.js** из корня сервиса.
+```
 module.exports = {
   overrides: [
     {
@@ -24,8 +26,10 @@ module.exports = {
   ],
   root: true,
 };
+```
 
 ### prettier
-Добавить в `package.json` строчку
-
-  "prettier": "@wspro/eslint"
+Добавить в **package.json** строчку
+```
+"prettier": "@wspro/eslint"
+```
