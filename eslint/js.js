@@ -64,6 +64,7 @@ module.exports = {
         allowForLoopAfterthoughts: true,
       },
     ],
+    'no-promise-executor-return': 0,
     'no-restricted-syntax': 0,
     'padding-line-between-statements': [
       2,
@@ -71,6 +72,16 @@ module.exports = {
         blankLine: 'always',
         next: '*',
         prev: ['block-like'],
+      },
+      {
+        blankLine: 'always',
+        next: 'if',
+        prev: '*',
+      },
+      {
+        blankLine: 'always',
+        next: '*',
+        prev: 'if',
       },
     ],
     'react/jsx-filename-extension': 0,

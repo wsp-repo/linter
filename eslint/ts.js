@@ -1,6 +1,6 @@
 module.exports = {
   extends: [
-    'airbnb-typescript',
+    'airbnb-typescript/base',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
@@ -50,6 +50,25 @@ module.exports = {
         leadingUnderscore: 'forbid',
         selector: 'default',
         trailingUnderscore: 'forbid',
+      },
+      {
+        format: null,
+        modifiers: ['requiresQuotes'],
+        selector: [
+          'accessor',
+          'classMethod',
+          'classProperty',
+          'enumMember',
+          'objectLiteralMethod',
+          'objectLiteralProperty',
+          'typeMethod',
+          'typeProperty',
+        ],
+      },
+      {
+        format: null,
+        modifiers: ['destructured', 'unused'],
+        selector: 'variable',
       },
       {
         format: ['camelCase', 'UPPER_CASE'],
@@ -116,6 +135,7 @@ module.exports = {
         allowNumber: true,
       },
     ],
+    '@typescript-eslint/return-await': [2, 'in-try-catch'],
     'arrow-parens': [
       1,
       'always',
@@ -169,6 +189,7 @@ module.exports = {
         allowForLoopAfterthoughts: true,
       },
     ],
+    'no-promise-executor-return': 0,
     'no-restricted-syntax': 0,
     'padding-line-between-statements': [
       2,
@@ -176,6 +197,16 @@ module.exports = {
         blankLine: 'always',
         next: '*',
         prev: ['block-like'],
+      },
+      {
+        blankLine: 'always',
+        next: 'if',
+        prev: '*',
+      },
+      {
+        blankLine: 'always',
+        next: '*',
+        prev: 'if',
       },
     ],
     'react/jsx-filename-extension': 0,
@@ -195,9 +226,9 @@ module.exports = {
           // Relative imports.
           // Anything that starts with a dot.
           ['^\\.'],
-          // Interfaces
-          ['^\\..*(\\/|\\.)interface'],
-          // Сonstants
+          // Interfaces, typings
+          ['^\\..*(\\/|\\.)(interface|types$|typings$)'],
+          // Constants
           ['^\\..*(\\/|\\.)(constant|config)'],
         ],
       },
