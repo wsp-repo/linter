@@ -1,3 +1,31 @@
+function eslintMembersGroup(suffix) {
+  return [
+    `public-static-${suffix}`,
+    `protected-static-${suffix}`,
+    `private-static-${suffix}`,
+    `#private-static-${suffix}`,
+
+    `public-instance-${suffix}`,
+    `protected-instance-${suffix}`,
+    `private-instance-${suffix}`,
+    `#private-instance-${suffix}`,
+
+    `public-abstract-${suffix}`,
+    `protected-abstract-${suffix}`,
+
+    `public-${suffix}`,
+    `protected-${suffix}`,
+    `private-${suffix}`,
+    `#private-${suffix}`,
+
+    `static-${suffix}`,
+    `instance-${suffix}`,
+    `abstract-${suffix}`,
+
+    suffix,
+  ];
+}
+
 module.exports = {
   extends: [
     'airbnb-typescript/base',
@@ -42,7 +70,38 @@ module.exports = {
       },
     ],
     '@typescript-eslint/explicit-module-boundary-types': 2,
-    '@typescript-eslint/member-ordering': 2,
+    '@typescript-eslint/member-ordering': [
+      'error',
+      {
+        default: [
+          // Index signature
+          'signature',
+          'call-signature',
+
+          // Fields
+          ...eslintMembersGroup('field'),
+
+          // Static initialization
+          'static-initialization',
+
+          // Constructors
+          'public-constructor',
+          'protected-constructor',
+          'private-constructor',
+
+          'constructor',
+
+          // Getters
+          ...eslintMembersGroup('get'),
+
+          // Setters
+          ...eslintMembersGroup('set'),
+
+          // Methods
+          ...eslintMembersGroup('method'),
+        ],
+      },
+    ],
     '@typescript-eslint/naming-convention': [
       2,
       {
