@@ -38,6 +38,8 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended',
   ],
+  files: ['*.ts'],
+  parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'jest', 'simple-import-sort'],
   rules: {
     '@typescript-eslint/await-thenable': 1,

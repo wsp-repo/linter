@@ -14,6 +14,7 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended',
   ],
+  files: ['*.js'],
   plugins: ['jest'],
   rules: {
     'arrow-parens': [
