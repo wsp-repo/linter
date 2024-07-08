@@ -40,7 +40,7 @@ module.exports = {
   ],
   files: ['*.ts'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'jest', 'simple-import-sort'],
+  plugins: ['@typescript-eslint', 'jest', 'simple-import-sort', 'typescript-sort'],
   rules: {
     '@typescript-eslint/await-thenable': 1,
     '@typescript-eslint/comma-dangle': [
@@ -296,5 +296,8 @@ module.exports = {
     ],
     'sort-imports': 0,
     'sort-keys': 2,
+    'typescript-sort/interface': 2,
+    'typescript-sort/type': 2,
+    'typescript-sort/enum': 2,
   },
 };
