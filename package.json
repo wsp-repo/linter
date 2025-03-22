@@ -1,9 +1,9 @@
 {
-  "name": "@wspro/linter",
-  "version": "1.0.8",
+  "name": "@zalib/linter",
+  "version": "1.0.9",
   "description": "Linter configs",
   "author": "https://github.com/wsp-repo/",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "keywords": [
     "prettier",
     "eslint",
@@ -11,8 +11,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wsp-repo/linter.git"
+    "url": "git+https://github.com/wsp-repo/linter.git"
   },
+  "homepage": "https://github.com/wsp-repo/linter#readme",
+  "bugs": {
+    "url": "https://github.com/wsp-repo/linter/issues"
+  },
+
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
