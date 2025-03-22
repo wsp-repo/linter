@@ -1,6 +1,6 @@
 ## Установка модуля
 ```
-npm i --save-dev --save-exact @wspro/linter@latest
+npm i --save-dev --save-exact @zalib/linter
 ```
 
 ## Подключение конфигов
@@ -8,8 +8,8 @@ npm i --save-dev --save-exact @wspro/linter@latest
 ### eslint
 Пример конфига **.eslintrc.js** из корня сервиса.
 ```
-const jsEslintConfig = require('@wspro/linter/eslint/js');
-const tsEslintConfig = require('@wspro/linter/eslint/ts');
+const jsEslintConfig = require('@zalib/linter/eslint/js');
+const tsEslintConfig = require('@zalib/linter/eslint/ts');
 
 module.exports = {
   overrides: [
@@ -34,7 +34,7 @@ module.exports = {
 ### prettier
 Добавить в **package.json** в корневую секцию:
 ```
-"prettier": "@wspro/linter/prettier"
+"prettier": "@zalib/linter/prettier"
 ```
 
 ## Использование
@@ -73,20 +73,20 @@ npm i --save-dev --save-exact husky@latest
 ### Версии пакетов с отсуствием конфликтов
 ```
 "devDependencies": {
-  "@typescript-eslint/eslint-plugin": "6.21.0",
-  "@typescript-eslint/parser": "6.21.0",
-  "eslint": "8.57.0",
+  "@typescript-eslint/eslint-plugin": "7.18.0",
+  "@typescript-eslint/parser": "7.18.0",
+  "eslint": "8.57.1",
   "eslint-config-airbnb-base": "15.0.0",
-  "eslint-config-airbnb-typescript": "17.1.0",
-  "eslint-config-prettier": "9.1.0",
-  "eslint-plugin-import": "2.29.1",
-  "eslint-plugin-jest": "28.5.0",
-  "eslint-plugin-jsx-a11y": "6.8.0",
-  "eslint-plugin-prettier": "5.1.3",
-  "eslint-plugin-simple-import-sort": "12.1.0",
+  "eslint-config-airbnb-typescript": "18.0.0",
+  "eslint-config-prettier": "10.1.1",
+  "eslint-plugin-import": "2.31.0",
+  "eslint-plugin-jest": "28.11.0",
+  "eslint-plugin-jsx-a11y": "6.10.2",
+  "eslint-plugin-prettier": "5.2.3",
+  "eslint-plugin-simple-import-sort": "12.1.1",
   "eslint-plugin-typescript-sort": "0.1.11",
   "jest": "29.7.0",
-  "prettier": "3.2.5",
-  "typescript": "5.4.5"
+  "prettier": "3.5.3",
+  "typescript": "5.8.2"
 }
 ```
