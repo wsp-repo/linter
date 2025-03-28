@@ -1,3 +1,5 @@
+const nodeBaseConfig = require('./node');
+
 function eslintMembersGroup(suffix) {
   return [
     `public-static-${suffix}`,
@@ -27,22 +29,30 @@ function eslintMembersGroup(suffix) {
 }
 
 module.exports = {
+  env: {
+    ...nodeBaseConfig.env,
+  },
   extends: [
+    ...nodeBaseConfig.extends,
     'airbnb-typescript/base',
-    'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:import/errors',
     'plugin:import/typescript',
     'plugin:import/warnings',
-    'prettier',
-    'plugin:prettier/recommended',
   ],
   files: ['*.ts'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'jest', 'simple-import-sort', 'typescript-sort'],
+  plugins: [
+    ...nodeBaseConfig.plugins,
+    '@typescript-eslint', 
+    'simple-import-sort',
+    'typescript-sort',
+  ],
   rules: {
+    ...nodeBaseConfig.rules,
     '@typescript-eslint/await-thenable': 1,
+    '@typescript-eslint/brace-style': 0,
     '@typescript-eslint/comma-dangle': [
       2,
       {
@@ -72,6 +82,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/explicit-module-boundary-types': 2,
+    '@typescript-eslint/indent': 0,
     '@typescript-eslint/member-ordering': [
       'error',
       {
@@ -167,6 +178,31 @@ module.exports = {
         selector: 'enumMember',
         trailingUnderscore: 'forbid',
       },
+      // Правило, разрешающее написание "_id" с нижним подчеркиванием
+      {
+        filter: {
+          match: true,
+          regex: '^_id$',
+        },
+        format: null,
+        leadingUnderscore: 'allow',
+        selector: 'typeProperty',
+        trailingUnderscore: 'forbid',
+      },
+    ],
+    '@typescript-eslint/no-base-to-string': 0,
+    '@typescript-eslint/no-empty-function': [
+      2,
+      {
+        allow: [
+          'constructors',
+          'private-constructors',
+          'protected-constructors',
+          'decoratedFunctions',
+          'overrideMethods',
+          'setters',
+        ]
+      }
     ],
     '@typescript-eslint/no-explicit-any': 2,
     '@typescript-eslint/no-floating-promises': 0,
@@ -197,18 +233,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/return-await': [2, 'in-try-catch'],
-    'arrow-parens': [
-      1,
-      'always',
-      {
-        requireForBlockBody: true,
-      },
-    ],
-    'class-methods-use-this': 0,
-    'comma-dangle': 0,
-    complexity: [2, { max: 10 }],
-    'function-paren-newline': 0,
-    'implicit-arrow-linebreak': 0,
     'import/default': 2,
     'import/export': 2,
     'import/first': 2,
@@ -225,53 +249,6 @@ module.exports = {
     'import/order': 0,
     'import/prefer-default-export': 0,
     'max-classes-per-file': 0,
-    'max-lines': [
-      2,
-      {
-        max: 500,
-        skipBlankLines: false,
-        skipComments: true,
-      },
-    ],
-    'max-lines-per-function': [
-      2,
-      {
-        max: 200,
-        skipBlankLines: false,
-        skipComments: true,
-      },
-    ],
-    'max-params': [2, { max: 3 }],
-    'no-await-in-loop': 0,
-    'no-continue': 0,
-    'no-plusplus': [
-      2,
-      {
-        allowForLoopAfterthoughts: true,
-      },
-    ],
-    'no-promise-executor-return': 0,
-    'no-restricted-syntax': 0,
-    'padding-line-between-statements': [
-      2,
-      {
-        blankLine: 'always',
-        next: '*',
-        prev: ['block-like'],
-      },
-      {
-        blankLine: 'always',
-        next: 'if',
-        prev: '*',
-      },
-      {
-        blankLine: 'always',
-        next: '*',
-        prev: 'if',
-      },
-    ],
-    'react/jsx-filename-extension': 0,
-    'require-await': 0,
     'simple-import-sort/imports': [
       2,
       {
@@ -295,7 +272,6 @@ module.exports = {
       },
     ],
     'sort-imports': 0,
-    'sort-keys': 2,
     'typescript-sort/interface': 2,
     'typescript-sort/type': 2,
     'typescript-sort/enum': 2,
