@@ -1,6 +1,6 @@
 {
   "name": "@zalib/linter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Linter configs",
   "author": "https://github.com/wsp-repo/",
   "license": "UNLICENSED",
@@ -9,13 +9,18 @@
     "eslint",
     "tslint"
   ],
+  "homepage": "https://github.com/wsp-repo/linter#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wsp-repo/linter.git"
   },
-  "homepage": "https://github.com/wsp-repo/linter#readme",
-  "bugs": {
-    "url": "https://github.com/wsp-repo/linter/issues"
+  "engines": {
+    "node": ">=20.19.0",
+    "npm": ">=10.8.0"
+  },
+  "scripts": {
+    "lint": "exit 0",
+    "test": "exit 0"
   },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "7.18.0",
