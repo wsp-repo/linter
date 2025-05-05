@@ -19,7 +19,11 @@
     "npm": ">=10.8.0"
   },
   "scripts": {
+    "build": "exit 0",
     "lint": "exit 0",
+    "release:patch": "npm version patch",
+    "release:minor": "npm version minor",
+    "release:major": "npm version major",
     "test": "exit 0"
   },
   "peerDependencies": {
