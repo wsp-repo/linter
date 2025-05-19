@@ -10,8 +10,7 @@ module.exports = {
     'plugin:jest/recommended',
     'plugin:jest/style',
     'prettier',
-    'plugin:prettier/recommended',
-    'airbnb-base',
+    'plugin:prettier/recommended'
   ],
   files: ['*.js'],
   plugins: [

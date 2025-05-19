@@ -84,7 +84,6 @@ module.exports = {
         prev: 'if',
       },
     ],
-    'react/jsx-filename-extension': 0,
     'require-await': 0,
     'sort-imports': 2,
     'sort-keys': 2,

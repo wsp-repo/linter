@@ -34,7 +34,7 @@ module.exports = {
   },
   extends: [
     ...nodeBaseConfig.extends,
-    'airbnb-typescript/base',
+    'typescript/base',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:import/errors',
