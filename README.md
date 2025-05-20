@@ -6,29 +6,35 @@ npm i --save-dev --save-exact @zalib/linter
 ## Подключение конфигов
 
 ### eslint
-Пример конфига **.eslintrc.js** из корня сервиса.
+Начиная с версии **eslint@9** изменился подход к файлам настройки. Файлы .eslintignore и .eslint.js заменяются одним файлом eslint.config.js (по умолчанию). Пример конфига **eslint.config.js** из корня сервиса.
 ```
-const jsEslintConfig = require('@zalib/linter/eslint/node-js');
-const tsEslintConfig = require('@zalib/linter/eslint/node-ts');
+const { defineConfig } = require('eslint/config');
 
-module.exports = {
-  overrides: [
-    {
-      ...jsEslintConfig,
-      files: ['*.js'],
-    },
-    {
-      ...tsEslintConfig,
-      files: ['*.ts'],
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        include: ['./src/**/*.ts', './test/**/*.ts'],
-        project: './tsconfig.json',
-      },
-    },
-  ],
-  root: true,
-};
+module.exports = defineConfig([
+  {
+    ignores: ['**/node_modules/**', '**/dist/**'],
+  },
+  require('@zalib/linter/eslint/node')(),
+  require('@zalib/linter/eslint/node-ts')(), // если нужен
+]);
+```
+
+Если необходимо ограничить путь к файлам только определенными директориями или для TS-проекта файл tsconfig.json имеет специфический путь или имя, тогда подключение нужно проводить с указанием необходимых параметров:
+```
+const { defineConfig } = require('eslint/config');
+
+module.exports = defineConfig([
+  {
+    ignores: ['**/node_modules/**', '**/dist/**'],
+  },
+  require('@zalib/linter/eslint/node')({
+    files: ['src/**/*.js', 'src/**/*.ts'] // или просто ['src/**/*.js']
+  }),
+  require('@zalib/linter/eslint/node-ts')({
+    files: ['src/**/*.ts', 'examples/**/*.ts'],
+    tsconfig: './tsconfig.dev.json'
+  }),
+]);
 ```
 
 ### prettier
@@ -43,9 +49,9 @@ module.exports = {
 Добавить в **package.json** в секцию **scripts**:
 ```
 "format": "prettier --write 'src/**/*.ts'",
-"lint": "eslint 'src/**/*.{ts,js}' --quiet",
-"lint:fix": "eslint 'src/**/*.{js,ts}' --quiet --fix",
-"lint:warns": "eslint 'src/**/*.ts' --max-warnings 0",
+"lint": "eslint --quiet",
+"lint:fix": "eslint --quiet --fix",
+"lint:warns": "eslint --max-warnings 0",
 ```
 
 ### Автоматизация при работе в репозитории
@@ -68,25 +74,4 @@ npm i --save-dev --save-exact husky@latest
     "pre-commit": "lint-staged --allow-empty"
   }
 },
-```
-
-### Версии пакетов с отсуствием конфликтов
-```
-"devDependencies": {
-  "@typescript-eslint/eslint-plugin": "7.18.0",
-  "@typescript-eslint/parser": "7.18.0",
-  "eslint": "8.57.1",
-  "eslint-config-airbnb-base": "15.0.0",
-  "eslint-config-airbnb-typescript": "18.0.0",
-  "eslint-config-prettier": "10.1.1",
-  "eslint-plugin-import": "2.31.0",
-  "eslint-plugin-jest": "28.11.0",
-  "eslint-plugin-jsx-a11y": "6.10.2",
-  "eslint-plugin-prettier": "5.2.3",
-  "eslint-plugin-simple-import-sort": "12.1.1",
-  "eslint-plugin-typescript-sort": "0.1.11",
-  "jest": "29.7.0",
-  "prettier": "3.5.3",
-  "typescript": "5.8.2"
-}
 ```
