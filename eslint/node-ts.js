@@ -1,4 +1,11 @@
-const nodeBaseConfig = require('./node');
+/* eslint-disable sort-keys */
+/* eslint-disable max-lines-per-function */
+
+const tsParser = require('@typescript-eslint/parser');
+const tsEslintPlugin = require('@typescript-eslint/eslint-plugin');
+const tsImportSortPlugin = require('eslint-plugin-simple-import-sort');
+const tsSortPlugin = require('eslint-plugin-typescript-sort');
+const tsImportPlugin = require('eslint-plugin-import');
 
 function eslintMembersGroup(suffix) {
   return [
@@ -28,31 +35,42 @@ function eslintMembersGroup(suffix) {
   ];
 }
 
-module.exports = {
-  env: {
-    ...nodeBaseConfig.env,
+module.exports = ({ files, tsconfig } = {}) => ({
+  files: files || ['**/*.ts'],
+  languageOptions: {
+    parser: tsParser,
+    parserOptions: {
+      ecmaFeatures: { modules: true },
+      project: tsconfig || './tsconfig.json',
+      sourceType: 'module',
+    },
   },
-  extends: [
-    ...nodeBaseConfig.extends,
-    'typescript/base',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:import/errors',
-    'plugin:import/typescript',
-    'plugin:import/warnings',
-  ],
-  files: ['*.ts'],
-  parser: '@typescript-eslint/parser',
-  plugins: [
-    ...nodeBaseConfig.plugins,
-    '@typescript-eslint', 
-    'simple-import-sort',
-    'typescript-sort',
-  ],
+  plugins: {
+    '@typescript-eslint': tsEslintPlugin,
+    'simple-import-sort': tsImportSortPlugin,
+    'typescript-sort': tsSortPlugin,
+    import: tsImportPlugin,
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {
+        project: tsconfig || './tsconfig.json',
+      },
+    },
+  },
   rules: {
-    ...nodeBaseConfig.rules,
-    '@typescript-eslint/await-thenable': 1,
-    '@typescript-eslint/brace-style': 0,
+    ...tsEslintPlugin.configs.recommended.rules,
+    ...tsEslintPlugin.configs['recommended-requiring-type-checking'].rules,
+    ...tsImportPlugin.configs.errors.rules,
+    ...tsImportPlugin.configs.warnings.rules,
+    ...tsImportPlugin.configs.typescript.rules,
+
+    'import/no-unresolved': 'error',
+    'import/extensions': ['error', 'ignorePackages', { ts: 'never' }],
+
+    '@typescript-eslint/await-thenable': 'warn',
+    '@typescript-eslint/brace-style': 'off',
+    /*
     '@typescript-eslint/comma-dangle': [
       2,
       {
@@ -66,6 +84,7 @@ module.exports = {
         tuples: 'always-multiline',
       },
     ],
+    */
     '@typescript-eslint/explicit-function-return-type': [
       'error',
       {
@@ -73,7 +92,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/explicit-member-accessibility': [
-      2,
+      'error',
       {
         accessibility: 'explicit',
         overrides: {
@@ -81,8 +100,8 @@ module.exports = {
         },
       },
     ],
-    '@typescript-eslint/explicit-module-boundary-types': 2,
-    '@typescript-eslint/indent': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 'error',
+    '@typescript-eslint/indent': 'off',
     '@typescript-eslint/member-ordering': [
       'error',
       {
@@ -116,7 +135,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/naming-convention': [
-      2,
+      'error',
       {
         format: ['camelCase'],
         leadingUnderscore: 'forbid',
@@ -178,21 +197,10 @@ module.exports = {
         selector: 'enumMember',
         trailingUnderscore: 'forbid',
       },
-      // Правило, разрешающее написание "_id" с нижним подчеркиванием
-      {
-        filter: {
-          match: true,
-          regex: '^_id$',
-        },
-        format: null,
-        leadingUnderscore: 'allow',
-        selector: 'typeProperty',
-        trailingUnderscore: 'forbid',
-      },
     ],
-    '@typescript-eslint/no-base-to-string': 0,
+    '@typescript-eslint/no-base-to-string': 'off',
     '@typescript-eslint/no-empty-function': [
-      2,
+      'error',
       {
         allow: [
           'constructors',
@@ -201,13 +209,13 @@ module.exports = {
           'decoratedFunctions',
           'overrideMethods',
           'setters',
-        ]
-      }
+        ],
+      },
     ],
-    '@typescript-eslint/no-explicit-any': 2,
-    '@typescript-eslint/no-floating-promises': 0,
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-magic-numbers': [
-      1,
+      'warn',
       {
         ignore: [-1, 0, 1],
         ignoreArrayIndexes: true,
@@ -217,15 +225,15 @@ module.exports = {
         ignoreReadonlyClassProperties: true,
       },
     ],
-    '@typescript-eslint/no-misused-promises': 0,
-    '@typescript-eslint/no-unsafe-argument': 0,
-    '@typescript-eslint/no-unsafe-assignment': 0,
-    '@typescript-eslint/no-unsafe-call': 0,
-    '@typescript-eslint/no-unsafe-member-access': 0,
-    '@typescript-eslint/no-unsafe-return': 0,
-    '@typescript-eslint/require-await': 1,
+    '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/require-await': 'warn',
     '@typescript-eslint/restrict-template-expressions': [
-      2,
+      'error',
       {
         allowAny: true,
         allowBoolean: true,
@@ -233,25 +241,25 @@ module.exports = {
         allowNumber: true,
       },
     ],
-    '@typescript-eslint/return-await': [2, 'in-try-catch'],
-    'import/default': 2,
-    'import/export': 2,
-    'import/first': 2,
-    'import/named': 2,
-    'import/namespace': 2,
-    'import/newline-after-import': 2,
-    'import/no-cycle': 2,
+    '@typescript-eslint/return-await': ['error', 'in-try-catch'],
+    'import/default': 'error',
+    'import/export': 'error',
+    'import/first': 'error',
+    'import/named': 'error',
+    'import/namespace': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-cycle': 'error',
     'import/no-extraneous-dependencies': [
-      2,
+      'error',
       {
         devDependencies: true,
       },
     ],
-    'import/order': 0,
-    'import/prefer-default-export': 0,
-    'max-classes-per-file': 0,
+    'import/order': 'off',
+    'import/prefer-default-export': 'off',
+    'max-classes-per-file': 'off',
     'simple-import-sort/imports': [
-      2,
+      'error',
       {
         groups: [
           // Side effect imports.
@@ -272,9 +280,9 @@ module.exports = {
         ],
       },
     ],
-    'sort-imports': 0,
-    'typescript-sort/interface': 2,
-    'typescript-sort/type': 2,
-    'typescript-sort/enum': 2,
+    'sort-imports': 'off',
+    'typescript-sort/interface': 'error',
+    'typescript-sort/type': 'error',
+    'typescript-sort/enum': 'error',
   },
-};
+});

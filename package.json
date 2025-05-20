@@ -20,7 +20,9 @@
   },
   "scripts": {
     "build": "exit 0",
-    "lint": "exit 0",
+    "lint": "eslint --quiet",
+    "lint:fix": "eslint --quiet --fix",
+    "lint:warns": "eslint --max-warnings 0",
     "release:patch": "npm version patch",
     "release:minor": "npm version minor",
     "release:major": "npm version major",
@@ -30,17 +32,14 @@
     "@typescript-eslint/eslint-plugin": "8.32.1",
     "@typescript-eslint/parser": "8.32.1",
     "eslint": "9.27.0",
-    "eslint-config-base": "1.0.0",
     "eslint-config-prettier": "10.1.5",
-    "eslint-config-typescript": "3.0.0",
+    "eslint-import-resolver-typescript": "4.3.5",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jest": "28.11.0",
     "eslint-plugin-prettier": "5.4.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "jest": "29.7.0",
+    "eslint-plugin-typescript-sort": "0.1.11",
     "prettier": "3.5.3"
   },
-  "devDependencies": {
-    "typescript": "5.8.3"
-  }
+  "prettier": "./prettier"
 }
