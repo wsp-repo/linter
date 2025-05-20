@@ -14,8 +14,9 @@ module.exports = defineConfig([
   {
     ignores: ['**/node_modules/**', '**/dist/**'],
   },
-  require('@zalib/linter/eslint/node')(),
-  require('@zalib/linter/eslint/node-ts')(), // если нужен
+  ...require('@zalib/linter/eslint/node')(),
+  ...require('@zalib/linter/eslint/node-ts')(), // если нужен
+  ...require('@zalib/linter/eslint/nestjs')(), // если нужен
 ]);
 ```
 
@@ -27,15 +28,17 @@ module.exports = defineConfig([
   {
     ignores: ['**/node_modules/**', '**/dist/**'],
   },
-  require('@zalib/linter/eslint/node')({
+  ...require('@zalib/linter/eslint/node')({
     files: ['src/**/*.js', 'src/**/*.ts'] // или просто ['src/**/*.js']
   }),
-  require('@zalib/linter/eslint/node-ts')({
+  ...require('@zalib/linter/eslint/node-ts')({
     files: ['src/**/*.ts', 'examples/**/*.ts'],
     tsconfig: './tsconfig.dev.json'
   }),
 ]);
 ```
+
+**Внимание!** Встроенные наборы правил экспортируются в виде массивов, поэтому нужно использовать спред синтаксис.
 
 ### prettier
 Добавить в **package.json** в корневую секцию:
