@@ -36,7 +36,7 @@ module.exports = {
     // рекурсивный проход по описанию типа
     function isApiResponseType(typeAnnotation, level = 0) {
       if (level === 0 && typeAnnotation?.typeName?.name === 'Promise') {
-        const typeArgument = typeAnnotation.typeParameters?.params[0];
+        const typeArgument = typeAnnotation.typeArguments?.params[0];
 
         return isApiResponseType(typeArgument, level + 1);
       }
